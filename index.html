@@ -1,255 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dynamic LED Sign Boards | Navi Mumbai</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>Dynamic LED Sign</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Modern Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0fffc1;
-      --secondary: #23272f;
-      --bg: #181a20;
-      --accent: #1f2937;
-      --text: #e5e7eb;
-      --card-bg: #23272f;
+      --bg-gradient: linear-gradient(135deg, #1a1a40 0%, #2c2c54 100%);
+      --accent: #e94560;
+      --accent-bright: #f8e16c;
+      --led: #0ff0fc;
+      --text-main: #f4f4f4;
+      --card-bg: rgba(44,44,84,0.85);
       --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #232526 0%, #1c1c1c 100%);
-      color: var(--text);
       margin: 0;
+      padding: 0;
       min-height: 100vh;
+      background: var(--bg-gradient);
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 80px 20px 60px 20px;
-      background: linear-gradient(135deg, #0fffc1 0%, #3a6073 100%);
-      color: #111;
-      border-bottom-left-radius: 60px 20px;
-      border-bottom-right-radius: 60px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      font-weight: 400;
-      margin-bottom: 28px;
-    }
-    .hero .cta-btn {
-      background: #111;
-      color: var(--primary);
-      border: none;
-      padding: 14px 38px;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      margin: 0 10px;
-    }
-    .hero .cta-btn:hover {
-      background: var(--primary);
-      color: #111;
-      transform: translateY(-2px) scale(1.03);
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      background: var(--accent);
-      padding: 10px 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 16px rgba(31, 38, 135, 0.07);
-    }
-    nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      transition: background 0.2s, color 0.2s;
-    }
-    nav a:hover {
-      background: var(--primary);
-      color: #111;
-    }
-    .container {
+    header {
       width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 16px 0 16px;
-      flex: 1;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      position: relative;
     }
-    section {
-      margin-bottom: 50px;
-      animation: fadeInUp 0.8s;
+    header h1 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      color: var(--led);
+      text-shadow: 0 0 16px var(--led), 0 2px 4px #0008;
+      margin: 0;
     }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(60px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    header p {
+      font-size: 1.3rem;
+      color: var(--accent-bright);
+      margin: 0.5em 0 0 0;
+      letter-spacing: 1px;
     }
     .card {
       background: var(--card-bg);
-      border-radius: 18px;
-      padding: 32px;
       box-shadow: var(--shadow);
-      margin-bottom: 24px;
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-6px) scale(1.01);
-    }
-    .card h2 {
-      font-size: 1.7rem;
-      margin-bottom: 16px;
-      color: var(--primary);
-      letter-spacing: 1px;
-    }
-    /* Icons and Details */
-    .icon-detail {
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      width: 95%;
+      max-width: 480px;
+      margin: 2rem auto 1rem auto;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 12px;
-      font-size: 1.07rem;
+      gap: 2rem;
+      border: 2px solid var(--accent);
+      animation: fadeIn 1.2s cubic-bezier(.44,.68,.73,.23);
     }
-    .icon-detail i {
-      color: var(--primary);
-      font-size: 1.2rem;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
     }
-    /* Reviews Section */
-    .reviews p {
-      margin-bottom: 18px;
-      border-left: 4px solid var(--primary);
-      padding-left: 10px;
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .led-preview {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 2.5rem;
+      color: var(--led);
+      padding: 0.7em 1.2em;
+      background: linear-gradient(90deg, #272768 20%, #0ff0fc 100%);
+      border-radius: 1em;
+      box-shadow: 0 0 24px #0ff0fc66;
+      margin-bottom: 1em;
+      letter-spacing: 1.5px;
+      text-align: center;
     }
-    .reviews .fa-star {
-      color: gold;
+    label {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--accent-bright);
+      margin-bottom: 0.5em;
     }
-    .btn {
-      display: inline-block;
-      margin-top: 22px;
-      padding: 11px 28px;
-      background: var(--primary);
-      color: #232526;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.2s;
-      font-size: 1rem;
-      box-shadow: var(--shadow);
+    input[type="text"] {
+      font-family: inherit;
+      font-size: 1.1rem;
+      padding: 0.8em 1em;
+      border: none;
+      border-radius: 0.7em;
+      background: #23234b;
+      color: var(--text-main);
+      outline: none;
+      margin-bottom: 1em;
+      box-shadow: 0 2px 8px #0003;
+      width: 100%;
+      max-width: 340px;
+      transition: background 0.3s;
     }
-    .btn:hover {
-      background: #00ccaa;
+    input[type="text"]:focus {
+      background: #35357a;
+    }
+    button {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.1rem;
+      padding: 0.7em 2.5em;
+      border-radius: 1.5em;
+      background: var(--accent);
       color: #fff;
+      border: none;
+      box-shadow: 0 4px 24px #e9456022;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background: #f8e16c;
+      color: #2c2c54;
+      transform: translateY(-3px) scale(1.03);
     }
     footer {
-      background: var(--accent);
+      margin: 2.5rem 0 1rem 0;
       text-align: center;
-      padding: 25px 0 18px 0;
-      color: #aaa;
+      color: #777;
       font-size: 1rem;
-      border-top-left-radius: 40px 13px;
-      border-top-right-radius: 40px 13px;
-    }
-    .social-links {
-      margin: 14px 0 0 0;
-    }
-    .social-links a {
-      color: var(--primary);
-      margin: 0 10px;
-      font-size: 1.3rem;
-      transition: color 0.2s;
-    }
-    .social-links a:hover {
-      color: #fff;
-    }
-    @media (max-width: 800px) {
-      .hero h1 { font-size: 2rem; }
-      .container { padding: 20px 5px 0 5px; }
-      .card { padding: 20px; }
+      opacity: 0.8;
     }
     @media (max-width: 600px) {
-      nav { gap: 16px; }
-      .hero { padding: 48px 5px 32px 5px; }
-      .container { padding: 10px 2px 0 2px; }
+      header h1 { font-size: 2.2rem;}
+      .card { padding: 1.3rem 0.7rem;}
+      .led-preview { font-size: 1.4rem;}
     }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <h1>Dynamic LED Sign Board Manufacturers</h1>
-    <p>Glow Signs &bull; Neon Boards &bull; Acrylic Designs<br>Navi Mumbai</p>
-    <a href="#contact" class="cta-btn">Contact Us</a>
-    <a href="#about" class="cta-btn">Learn More</a>
-  </section>
-  <nav>
-    <a href="#about"><i class="fa fa-info-circle"></i> About</a>
-    <a href="#location"><i class="fa fa-map-marker-alt"></i> Location</a>
-    <a href="#reviews"><i class="fa fa-star"></i> Reviews</a>
-    <a href="#contact"><i class="fa fa-envelope"></i> Contact</a>
-  </nav>
-  <div class="container">
-    <section id="about" class="card">
-      <h2>About Us</h2>
-      <p>Welcome to Dynamic LED Sign Boards, your trusted partner for innovative and vibrant signage solutions. We specialize in LED glow signs, acrylic boards, neon lights, and more for homes, offices, and businesses. Open 24 hours a day, we pride ourselves on delivering high-quality signage with a creative touch across Navi Mumbai.</p>
-    </section>
-    <section id="location" class="card">
-      <h2>Visit Us</h2>
-      <div class="icon-detail"><i class="fa fa-map-marker-alt"></i> Bus Stop, PAP A-28, near Ramnath Solar, MIDC Industrial Area, Mahape, Navi Mumbai, Maharashtra 400710</div>
-      <div class="icon-detail"><i class="fa fa-phone"></i> <a href="tel:09372805730" style="color:var(--primary);">093728 05730</a></div>
-      <iframe src="https://maps.google.com/maps?q=Dynamic%20Led%20Sign%20Board%20Manufacturers,%20Mahape&t=&z=15&ie=UTF8&iwloc=&output=embed" aria-label="Location Map"></iframe>
-    </section>
-    <section id="reviews" class="card reviews">
-      <h2>Customer Reviews</h2>
-      <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i> "It adds such a cool vibe to my gaming room."</p>
-      <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> "The quality is great, and they did exactly what I wanted."</p>
-      <p><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> "Don't pay adv... you may not get your product as well as money back."</p>
-      <a class="btn" href="https://www.google.com/search?q=Dynamic+Led+Sign+Sign+Board+Manufacturers+Glow+Sign+Led+Sign+Navi+Mumbai" target="_blank">Read All Reviews</a>
-    </section>
-    <section id="contact" class="card">
-      <h2>Contact Us</h2>
-      <div class="icon-detail"><i class="fa fa-envelope"></i> support@dynamicledsigns.com</div>
-      <div class="icon-detail"><i class="fa fa-phone"></i> 093728 05730</div>
-      <div class="icon-detail"><i class="fa fa-clock"></i> Open 24 hours</div>
-      <a class="btn" href="tel:09372805730">Call Now</a>
-    </section>
+  <header>
+    <h1>Dynamic LED Sign</h1>
+    <p>Create your own vibrant sign in real time</p>
+  </header>
+  <div class="card">
+    <div class="led-preview" id="ledSign">Your Text Here</div>
+    <label for="signText">Type Your Message:</label>
+    <input type="text" id="signText" maxlength="32" placeholder="Enter LED sign text...">
+    <button id="updateBtn">Show on LED Sign</button>
   </div>
   <footer>
-    <div>
-      &copy; 2025 Dynamic LED Sign Board Manufacturers. All Rights Reserved.
-    </div>
-    <div class="social-links">
-      <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/919372805730" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-      <a href="mailto:support@dynamicledsigns.com" title="Email"><i class="fa fa-envelope"></i></a>
-    </div>
+    &copy; 2025 FallingParrot &mdash; DynamicLedSign
   </footer>
+  <script>
+    const signText = document.getElementById('signText');
+    const ledSign = document.getElementById('ledSign');
+    document.getElementById('updateBtn').onclick = () => {
+      ledSign.textContent = signText.value || 'Your Text Here';
+    };
+    signText.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        ledSign.textContent = signText.value || 'Your Text Here';
+      }
+    });
+  </script>
 </body>
 </html>
